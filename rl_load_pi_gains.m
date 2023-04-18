@@ -1,10 +1,11 @@
+clear all
 %% Extract  characteristic equation coefficients
 % Initial setps: define symbolic vars
     syms L_s R s zeta wn Kp Ki Kd
 
 % Define plant model and controller
     P = 1/(s*L_s + R)
-    K = Kp + Ki/s +s*Kd
+    K = Kp + Ki/s 
 
 % Loop transfer function and complementary sensitivity
     L = K*P
@@ -25,7 +26,7 @@
     T.coeff.std = coeffs(T.std,s)
 
 % Solve for gains
-    k.diff.one = solve(T.coeff.std(1) == T.coeff.den(1),Kd) 
-    k.diff.two = solve(T.coeff.std(2) == T.coeff.den(2),Kd) 
+    Ki = solve(T.coeff.std(1) == T.coeff.den(1),Ki) 
+    Kp = solve(T.coeff.std(2) == T.coeff.den(2),Kp) 
 
 
